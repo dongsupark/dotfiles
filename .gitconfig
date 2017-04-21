@@ -1,0 +1,47 @@
+[user]
+	name = Dongsu Park
+	email = dpark@posteo.net
+[alias]
+	br = branch
+	co = checkout
+	ci = commit
+	cireset = commit --amend --no-edit --date=now
+	dump = cat-file -p
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	last = log -1 HEAD
+	st = status
+	type = cat-file -t
+	unstage = reset HEAD --
+	visual = !gitk
+[core]
+	abbrev = 8
+[sendemail]
+	smtpencryption = tls
+	smtpserver = posteo.de
+	smtpserverport = 587
+	smtpuser = dpark@posteo.net
+	from = "Dongsu Park <dpark@posteo.net>"
+	bcc = dpark@posteo.net
+[color]
+	ui = true
+[format]
+	suffix = .patch
+	numbered = auto
+	bcc = dpark@posteo.net
+	signoff = false
+	thread = true
+[imap]
+	folder = "[Gmail]/Drafts"
+	host = imaps://posteo.de
+	user = dpark@posteo.net
+	port = 993
+	sslverify = false
+[merge]
+	tool = meld
+	renamelimit = 5000
+[color]
+	ui = true
+[diff "odf"]
+	textconv=odt2txt
+[diff "default"]
+	xfuncname = "^[[:alpha:]$_].*[^:]$"

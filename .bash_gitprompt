@@ -1,0 +1,95 @@
+# .bash_gitprompt
+# Git Commands
+#
+# original sources - https://github.com/matthewmccullough/MatthewsShellConfig/
+# modified by Dongsu Park <dpark AT posteo.net>
+#
+# if $GITPROMPT_NOCOLOR is set to 1, prompt will be printed without colors.
+# if $GITPROMPT_NOSTATUS is set to 1, only "git branch" will be executed
+# instead of "git status" at every prompt.
+
+if [ "$GITPROMPT_NOCOLOR" = "1" ]; then
+        RED=""
+     YELLOW=""
+      GREEN=""
+       BLUE=""
+  LIGHT_RED=""
+LIGHT_GREEN=""
+      WHITE=""
+ LIGHT_GRAY=""
+ COLOR_NONE=""
+else
+        RED="\[\033[0;31m\]"
+     YELLOW="\[\033[0;33m\]"
+      GREEN="\[\033[0;32m\]"
+       BLUE="\[\033[0;34m\]"
+  LIGHT_RED="\[\033[1;31m\]"
+LIGHT_GREEN="\[\033[1;32m\]"
+      WHITE="\[\033[1;37m\]"
+ LIGHT_GRAY="\[\033[0;37m\]"
+ COLOR_NONE="\[\e[0m\]"
+fi
+
+function parse_git_branch {
+    if [ "$GITPROMPT_NOSTATUS" = "1" ]; then
+        git_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+        [ -n "${git_branch}" ] && git_branch=" (${git_branch})"
+        echo "${git_branch}"
+    else
+        git rev-parse --git-dir &> /dev/null
+        git_status="$(git status 2> /dev/null)"
+        branch_pattern="^# On branch ([^${IFS}]*)"
+        remote_pattern="# Your branch is (.*) of"
+        diverge_pattern="# Your branch and (.*) have diverged"
+
+        if [[ ! ${git_status}} =~ "working directory clean" ]]; then
+            state="${RED}⚡"
+        fi
+        # add an else if or two here if you want to get more specific
+        if [[ ${git_status} =~ ${remote_pattern} ]]; then
+            if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
+                remote="${YELLOW}↑"
+            else
+                remote="${YELLOW}↓"
+            fi
+        fi
+        if [[ ${git_status} =~ ${diverge_pattern} ]]; then
+            remote="${YELLOW}↕"
+        fi
+        if [[ ${git_status} =~ ${branch_pattern} ]]; then
+            branch=${BASH_REMATCH[1]}
+            echo " (${branch})${remote}${state}"
+        fi
+    fi
+}
+
+function git_dirty_flag {
+    git status 2> /dev/null | grep -c : | awk '{if ($1 > 0) print "⚡"}'
+}
+
+function prompt_func() {
+    previous_return_value=$?;
+    # The lowercase w is the full current working directory
+    #prompt="${TITLEBAR}${BLUE}[${RED}\w${GREEN}$(parse_git_branch)${BLUE}]${COLOR_NONE}"
+
+    # Capital W is just the trailing part of the current working directory
+    # personalized by Dongsu Park
+    prompt="${TITLEBAR}${BLUE}${RED}\u@\h `dirs`${GREEN}$(parse_git_branch) ${BLUE}{\!}${COLOR_NONE}"
+
+    if test $previous_return_value -eq 0
+    then
+        # personalized by Dongsu Park
+        PS1="${prompt} "
+        #PS1="${prompt}> "
+
+        # OLD_PROMPT should be set back again, to avoid confusions in branch names when typing ^C or so.
+        OLD_PROMPT=$PS1
+    else
+        # don't change the prompt (use the default one) if it's not a git dir
+        PS1=$OLD_PROMPT
+    fi
+}
+
+# Preserve current prompt
+OLD_PROMPT=$PS1
+PROMPT_COMMAND=prompt_func

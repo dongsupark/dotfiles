@@ -1,0 +1,119 @@
+# A basic .muttrc for multiple accounts
+#  Dongsu Park <dpark AT posteo.net>
+
+# Change the following six lines to your Gmail account details
+set imap_user = "dpark@posteo.net"
+set smtp_url = "smtp://hipporoll@posteo.de@posteo.de:587/"
+set my_pass1 = "`awk '/posteo:/ {print $2}' ~/.secret/passwd`"
+set my_pass2 = "`awk '/advance38:/ {print $2}' ~/.secret/passwd`"
+set imap_pass = $my_pass1
+set smtp_pass = $my_pass1
+
+set from = "dpark@posteo.net"
+set realname = "Dongsu Park"
+
+# Change the following line to a different editor you prefer.
+set editor = "vim +/^$"
+
+# Basic config, you can leave this as is
+set folder = "$HOME/Maildir"
+
+set mbox = '~/Maildir'
+set mbox_type = Maildir
+set postponed = "+posteo/Drafts"
+set record = "+posteo/Sent"
+set spoolfile = "+posteo/INBOX"
+
+set certificate_file=~/.mutt/certificates
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+
+set hostname = posteo.de
+set imap_keepalive = 300
+set mail_check = 30
+set timeout = 300
+
+set date_format="%d.%m.%Y %H:%M"
+set folder_format="%2C %t %8s %d %N %f"
+set index_format="%4C %Z %D %-15.15L (%4l) %s"
+set pager_format="%-10.10i %[!%d.%m.%Y %R]"
+
+set abort_nosubject = no
+set auto_tag = yes
+set beep = no
+set delete = yes
+set edit_headers = yes
+set fast_reply = yes
+set include = yes
+set markers = no
+set move = no
+set menu_scroll
+set pager_context = 1
+set pager_index_lines = 6
+set pgp_verify_sig = no
+set imap_check_subscribed
+set sort = 'threads'
+set sort_aux = 'last-date-sent'
+set sort_browser = 'unsorted'
+set ssl_starttls = yes
+set ssl_min_dh_prime_bits = 512
+set sendmail = '/usr/bin/ssmtp'
+set assumed_charset="utf-8:euc-kr:iso-8859-1"
+set charset="utf-8"
+set config_charset="utf-8"
+set send_charset="utf-8:euc-kr:iso-8859-1"
+
+alternates '(advance38|dpark1978)([-+].*)?@.*'
+
+ignore *
+unignore From To Cc Date Subject Organization
+hdr_order From To Cc Date
+alternative_order text/plain text/html *
+auto_view text/html
+
+account-hook  'imaps://hipporoll@posteo.de' \
+    'set imap_user="hipporoll@posteo.de" imap_pass="$my_pass1"'
+account-hook  'imaps://advance38@imap.gmail.com' \
+    'set imap_user="advance38@gmail.com" imap_pass="$my_pass2"'
+
+folder-hook   posteo/*  'set from="Dongsu Park <dpark@posteo.net>" \
+    smtp_url="smtp://hipporoll@posteo.de@posteo.de:587" smtp_pass="$my_pass1" \
+    record="+posteo/Sent" postponed="+posteo/Drafts"'
+folder-hook   advance38/*  'set from="Dongsu Park <advance38@gmail.com>" \
+    smtp_url="smtp://advance38@smtp.gmail.com:587" smtp_pass="$my_pass2" \
+    record="+advance38/[Gmail].Sent Mail" postponed = "+advance38/[Gmail].Drafts"'
+
+mailboxes ! +posteo/INBOX +posteo/sns +posteo/berlin +posteo/etc +posteo/github.coreos +posteo/github.coreos-kubernetes +posteo/github.fleet +posteo/github.etcd +posteo/github.rkt +posteo/github.rktlet +posteo/github.go-systemd +posteo/github.systemd +posteo/github.kubernetes +posteo/github.minikube +posteo/MailingLists.containers +posteo/MailingLists.linux-fsdevel +posteo/MailingLists.linux-kernel +advance38/systemd +advance38/util-linux +golang
+
+unset imap_passive
+
+bind browser  \t	noop
+bind browser  ,\t	noop
+
+bind index R	group-reply
+bind index  \t	next-new-then-unread
+bind index ,\t	previous-new-then-unread
+bind index p	previous-page
+bind index -	previous-page
+
+bind pager R	group-reply
+bind pager  \t	next-new-then-unread
+bind pager ,\t	previous-new-then-unread
+bind pager p	previous-page
+bind pager -	previous-page
+
+# color
+color quoted cyan black
+
+# Gmail-style keyboard shortcuts
+macro index,pager y "<enter-command>set trash=\"imaps://imap.googlemail.com/[Gmail]/Trash\"\n <delete-message>" "Gmail archive message"
+
+macro index,pager l "<change-folder>?<toggle-mailboxes>" "Listing mailboxes"
+
+macro index,pager gg "<change-folder>=posteo/INBOX<enter>" "Go to inbox advance38"
+macro index,pager gi "<change-folder>=posteo/INBOX<enter>" "Go to inbox advance38"
+macro index,pager ga "<change-folder>=[<tab>/All<tab><enter>" "Go to all mail"
+macro index,pager gs "<change-folder>=[<tab>Starred<enter>" "Go to starred messages"
+macro index,pager gd "<change-folder>=[<tab>Drafts<enter>" "Go to drafts"
+
+set alias_file="~/.mutt/aliases"
