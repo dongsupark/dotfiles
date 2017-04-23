@@ -31,20 +31,17 @@ shopt -s extglob	# Necessary for programmable completion
 
 ## Aliases
 
-psgrep() { ps aux | egrep ${1} | egrep -v egrep; }
+psgrep() { ps aux | egrep ${1} | egrep -v '(egrep|grep)'; }
 copy(){ cp -v "$1" "$2"&watch -n 1 du -sh "$1" "$2" 2>/dev/null;}
 
 alias crb='makecscope ; find . -name \*.[ch] -o -name \*.cpp -o -name \*.cc | xargs ctags --extra=+f --c-kinds=+px --exclude=.git --exclude=.pc'
-alias crbkernel='source ~/.bashrc; makecscope ${KERNEL_DIR}/; find ${KERNEL_DIR}/ -name \*.[ch] -o -name \*.cpp | xargs ctags --extra=+f --c-kinds=+px --exclude=.git --exclude=.pc --exclude=debian --exclude=*.mod.[ch]* --exclude=Documentation/* --exclude=*/arch/[a-u]* --exclude=*/arch/xtensa*'
+alias crbkernel='[ -f "$PWD/.config" ] && export KERNEL_DIR=$PWD; echo "general index under kernel dir $KERNEL_DIR"; makecscope $KERNEL_DIR; ctags -R --extra=+f --c-kinds=+px --exclude=.git --exclude=.pc --exclude=*.mod.c --exclude=debian --exclude=*Documentation/* --exclude=*arch/[a-u]* --exclude=*arch/xtensa* $KERNEL_DIR'
 alias =logout
 alias =clear
 alias d='date +"%a, %h %d, %r"'
 alias dir='ls -l --color=auto --format=vertical'
 alias vdir='ls -l --color=auto --format=long'
-alias euc='export LANG=ko_KR.eucKR; export LC_ALL=ko_KR.eucKR; stty -istrip -parity'
-alias fch=fetchmail
 alias hi=history
-alias jpdfbookmarks='java -jar /usr/local/lib/jpdfbookmarks/jpdfbookmarks.jar'
 alias k9='kill -9'
 alias ls='ls -sF'
 alias la='ls -A'
@@ -52,7 +49,6 @@ alias ll='ls -l'
 alias lld='ls -ld'
 alias more='less'
 alias p=pwd
-alias pcrop='pdfcrop --margins 10'
 alias psc=psgrep
 alias screen='TERM=screen screen'
 alias telnet="telnet -e ''"	# or -L ?
