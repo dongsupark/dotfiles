@@ -1,5 +1,5 @@
 " ==================================================================
-" $HOME/.vimrc
+" ~/.vimrc
 " Author:       Dongsu Park <dpark AT posteo.net>
 " ==================================================================
 version 7.0
@@ -273,7 +273,7 @@ let g:syntastic_go_checkers = 1
 let g:rustfmt_autosave = 0
 
 set hidden
-let g:racer_cmd = '/home/advance/.cargo/bin/racer'
+let g:racer_cmd = '~/.cargo/bin/racer'
 
 au FileType rust nmap <leader>r <Plug>(RustRun)
 au FileType rust nmap <leader>b <Plug>(RustBuild)
