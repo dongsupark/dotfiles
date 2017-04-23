@@ -39,25 +39,27 @@ set index_format="%4C %Z %D %-15.15L (%4l) %s"
 set pager_format="%-10.10i %[!%d.%m.%Y %R]"
 
 set abort_nosubject = no
+set askcc = yes
 set auto_tag = yes
 set beep = no
 set delete = yes
 set edit_headers = yes
 set fast_reply = yes
+set imap_check_subscribed
 set include = yes
 set markers = no
-set move = no
 set menu_scroll
+set move = no
 set pager_context = 1
 set pager_index_lines = 6
 set pgp_verify_sig = no
-set imap_check_subscribed
+set sendmail = '/usr/bin/ssmtp'
 set sort = 'threads'
 set sort_aux = 'last-date-sent'
 set sort_browser = 'unsorted'
 set ssl_starttls = yes
 set ssl_min_dh_prime_bits = 512
-set sendmail = '/usr/bin/ssmtp'
+
 set assumed_charset="utf-8:euc-kr:iso-8859-1"
 set charset="utf-8"
 set config_charset="utf-8"
