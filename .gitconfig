@@ -13,17 +13,17 @@
 	type = cat-file -t
 	unstage = reset HEAD --
 	visual = !gitk
-[core]
-	abbrev = 8
-[sendemail]
-	smtpencryption = tls
-	smtpserver = posteo.de
-	smtpserverport = 587
-	smtpuser = dpark@posteo.net
-	from = "Dongsu Park <dpark@posteo.net>"
-	bcc = dpark@posteo.net
 [color]
 	ui = true
+[core]
+	abbrev = 8
+[diff]
+	algorithm = patience
+	renamelimit = 0
+[diff "odf"]
+	textconv=odt2txt
+[diff "default"]
+	xfuncname = "^[[:alpha:]$_].*[^:]$"
 [format]
 	suffix = .patch
 	numbered = auto
@@ -39,9 +39,10 @@
 [merge]
 	tool = meld
 	renamelimit = 5000
-[color]
-	ui = true
-[diff "odf"]
-	textconv=odt2txt
-[diff "default"]
-	xfuncname = "^[[:alpha:]$_].*[^:]$"
+[sendemail]
+	smtpencryption = tls
+	smtpserver = posteo.de
+	smtpserverport = 587
+	smtpuser = dpark@posteo.net
+	from = "Dongsu Park <dpark@posteo.net>"
+	bcc = dpark@posteo.net
