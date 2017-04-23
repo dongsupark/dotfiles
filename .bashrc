@@ -179,3 +179,10 @@ if [ -f ~/.git-completion.bash ]; then
 	. ~/.git-completion.bash
 fi
 
+if [ -f ~/.k8s-completion.bash ]; then
+	. ~/.k8s-completion.bash
+fi
+
+if [ -f ~/.minikube-completion.bash ]; then
+	. ~/.minikube-completion.bash
+fi
