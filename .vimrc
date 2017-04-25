@@ -84,17 +84,18 @@ augroup cfile
     autocmd BufRead,BufNewFile */systemd*/*.{c,h,cpp,hx} set tabstop=8|set shiftwidth=8
     " qemu source files
     autocmd BufRead,BufNewFile */qemu*/*.{c,h,cpp,hx} set tabstop=4|set shiftwidth=4
-    " dbndns source files
-    autocmd BufRead,BufNewFile */dbndns*/*.{c,h,cpp,hx} set tabstop=8|set shiftwidth=2
 augroup END
 
+autocmd FileType diff set noexpandtab|set tabstop=8|set shiftwidth=8|set autoindent|set smartindent
 autocmd FileType html set isk+=:,/,~
 autocmd FileType java set expandtab|set autoindent|set smartindent
+autocmd FileType json set expandtab|set tabstop=2|set shiftwidth=2|set autoindent|set smartindent
 autocmd FileType make set noexpandtab|set tabstop=8|set shiftwidth=8|set autoindent|set smartindent
 autocmd FileType perl set expandtab|set autoindent|set nosmartindent
 autocmd FileType python set expandtab|set autoindent|set nosmartindent
 autocmd FileType ruby set expandtab|set autoindent|set nosmartindent
-autocmd FileType diff set noexpandtab|set tabstop=8|set shiftwidth=8|set autoindent|set smartindent
+autocmd FileType toml set expandtab|set tabstop=2|set shiftwidth=2|set autoindent|set smartindent
+autocmd FileType yaml set expandtab|set tabstop=2|set shiftwidth=2|set autoindent|set smartindent
 
 " ==============
 " Autocommands Group
@@ -199,24 +200,6 @@ if filereadable(FTFILE)
 endif
 
 " ======================
-" Universal Text Linking
-" ======================
-
-let UTLFILE="~/.vim/plugin/utl.vim"
-if filereadable(UTLFILE)
-    source UTLFILE
-endif
-
-" ======================
-" VimIM
-" ======================
-
-let VIMIMFILE="~/.vim/plugin/vimim.vim"
-if filereadable(VIMIMFILE)
-    source VIMIMFILE
-endif
-
-" ======================
 " Vim plug
 " ======================
 
@@ -270,7 +253,7 @@ let g:syntastic_go_checkers = 1
 " ======================
 " rust
 " ======================
-let g:rustfmt_autosave = 0
+let g:rustfmt_autosave = 1
 
 set hidden
 let g:racer_cmd = '~/.cargo/bin/racer'
