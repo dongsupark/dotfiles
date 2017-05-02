@@ -266,3 +266,11 @@ au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 au FileType rust nmap <C-]>  <Plug>(rust-def)
+
+" ======================
+" typescript
+" ======================
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+
+au FileType typescript :set makeprg=tsc
