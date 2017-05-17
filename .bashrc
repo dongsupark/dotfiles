@@ -164,6 +164,9 @@ export CGO_CPPFLAGS="-Wno-deprecated-declarations"
 export PATH=$HOME/.cargo/bin:$PATH
 export RUST_SRC_PATH=$HOME/Dev/rust/rust-master/src
 
+# matchbox
+export SAN=DNS.1:matchbox.example.com,IP.1:127.0.0.1
+
 # git prompt
 if [ -f ~/.bash_gitprompt ]; then
 	. ~/.bash_gitprompt
