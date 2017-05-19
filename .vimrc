@@ -274,3 +274,10 @@ let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = ''
 
 au FileType typescript :set makeprg=tsc
+
+" ======================
+" terraform
+" ======================
+let g:terraform_align=1
+
+au FileType terraform setlocal commentstring=#%s
