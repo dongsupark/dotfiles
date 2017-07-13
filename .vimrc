@@ -82,6 +82,7 @@ augroup cfile
     autocmd BufRead,BufNewFile */linux*/*.{c,h,cpp,hx} set noexpandtab|set tabstop=8|set shiftwidth=8
     " systemd source files
     autocmd BufRead,BufNewFile */systemd*/*.{c,h,cpp,hx} set tabstop=8|set shiftwidth=8
+    autocmd BufRead,BufNewFile */casync*/*.{c,h,cpp,hx} set tabstop=8|set shiftwidth=8
     " qemu source files
     autocmd BufRead,BufNewFile */qemu*/*.{c,h,cpp,hx} set tabstop=4|set shiftwidth=4
 augroup END
