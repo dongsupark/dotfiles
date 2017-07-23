@@ -1,11 +1,6 @@
 # .bash_profile
 #  Dongsu Park <dpark AT posteo.net>
 
-# Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
-
 # User specific environment and startup programs
 
 if [ ! -z ${REMOTEHOST} ]; then
@@ -30,11 +25,6 @@ export FIGNORE=:.o:.bak:.old:.aux:.toc
 export PS1="\u@\h `dirs` $(parse_git_branch) {\!} "
 
 unset USERNAME
-
-# Execute the subshell script
-if [ -e ~/.bashrc ]; then
-	source ~/.bashrc
-fi
 
 export PKGDIR=/usr/portage/packages
 
