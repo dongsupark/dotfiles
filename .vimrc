@@ -80,11 +80,14 @@ augroup cfile
     autocmd BufRead,BufNewFile *.{c,h,cpp,hx} set expandtab|set tabstop=4|set shiftwidth=4|set textwidth=78|set cindent
     " kernel source files
     autocmd BufRead,BufNewFile */linux*/*.{c,h,cpp,hx} set noexpandtab|set tabstop=8|set shiftwidth=8
+    autocmd BufRead,BufNewFile */*{bpf,iproute,tcptracer}*/*.{c,h,cpp,hx} set noexpandtab|set tabstop=8|set shiftwidth=8
     " systemd source files
     autocmd BufRead,BufNewFile */systemd*/*.{c,h,cpp,hx} set tabstop=8|set shiftwidth=8
     autocmd BufRead,BufNewFile */casync*/*.{c,h,cpp,hx} set tabstop=8|set shiftwidth=8
     " qemu source files
     autocmd BufRead,BufNewFile */qemu*/*.{c,h,cpp,hx} set tabstop=4|set shiftwidth=4
+    " bcc source files
+    autocmd BufRead,BufNewFile */bcc*/*.{c,h,cpp,hx} set tabstop=2|set shiftwidth=2
 augroup END
 
 autocmd FileType diff set noexpandtab|set tabstop=8|set shiftwidth=8|set autoindent|set smartindent
